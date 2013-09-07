@@ -1,0 +1,28 @@
+{
+	"frontends": [
+		{
+			"name": "server1",
+			"bind": "0.0.0.0:9010",
+			"x-forwarded-for": true,
+			"paths": ["localhost/google", "localhost", "127.0.0.1", "localhost/v1/ping"],
+			"active": true
+		},
+		{
+			"name": "server2 tls",
+			"bind": "0.0.0.0:443",
+			"https": true,
+			"keyfile": "/path/to/key.pem",
+			"certfile": "/path/to/cert.pem",
+			"x-forwarded-for": true,
+			"paths": ["localhost", "127.0.0.1"],
+			"active": false
+		}
+	],
+	"paths": {
+		"localhost/search": ["google.com", "yahoo.com"],
+		"localhost/v1/ping": ["localhost:9000"],
+		"localhost": ["localhost:9010", "localhost:9009"],
+		"loco.localhost": ["localhost:9011", "localhost:9012"]
+	}
+}
+
